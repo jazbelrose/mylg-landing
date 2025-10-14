@@ -1,10 +1,5 @@
-// src/app/contexts/DataProvider.tsx
-import React, { PropsWithChildren } from "react";
-import { UserProvider } from "./UserProvider";
-import { ProjectsProvider } from "./ProjectsProvider";
-import { MessagesProvider } from "./MessagesProvider";
+import React, { createContext, useMemo, useState, PropsWithChildren } from "react";
 
-// Export the types and data models from here for backward compatibility
 export type Role = "admin" | "designer" | "builder" | "vendor" | "client" | string;
 
 export interface UserLite {
@@ -23,7 +18,7 @@ export interface UserLite {
   company?: string;
   collaborators?: string[];
   projects?: string[];
-  [key: string]: unknown; // Add index signature for flexibility
+  [key: string]: unknown;
 }
 
 export interface TeamMember {
@@ -35,8 +30,8 @@ export interface TeamMember {
 export interface TimelineEvent {
   id?: string;
   title?: string;
-  date?: string;        // ISO string
-  timestamp?: string;   // ISO string
+  date?: string;
+  timestamp?: string;
   [k: string]: unknown;
 }
 
@@ -77,39 +72,43 @@ export interface Message {
   text?: string;
   body?: string;
   content?: string;
-  timestamp?: string;      // ISO
-  reactions?: Record<string, string[]>; // emoji -> userIds
+  timestamp?: string;
+  reactions?: Record<string, string[]>;
   [k: string]: unknown;
 }
 
 export interface Thread {
   conversationId: string;
   otherUserId: string;
-  lastMsgTs: string; // ISO string
+  lastMsgTs: string;
   snippet?: string;
   read?: boolean;
 }
 
-// ---------- Provider ----------
+export interface LandingDataValue {
+  opacity: number;
+  setOpacity: React.Dispatch<React.SetStateAction<number>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const DataContext = createContext<LandingDataValue | undefined>(undefined);
+
 export const DataProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <UserProvider>
-      <ProjectsProvider>
-        <MessagesProvider>
-          {children}
-        </MessagesProvider>
-      </ProjectsProvider>
-    </UserProvider>
+  const [opacity, setOpacity] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const value = useMemo<LandingDataValue>(
+    () => ({
+      opacity,
+      setOpacity,
+      isLoading,
+      setIsLoading,
+    }),
+    [opacity, isLoading],
   );
+
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 
 export default DataProvider;
-
-
-
-
-
-
-
-
-

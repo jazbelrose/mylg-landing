@@ -6,18 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { NavigationDirectionProvider } from "./contexts/NavigationDirectionProvider";
-import AuthEventHandler from "./contexts/autheventhandler";
-import { AuthProvider } from "./contexts/AuthContext";
 import { DataProvider } from "./contexts/DataProvider";
-import { InvitesProvider } from "./contexts/InvitesProvider";
-import { NotificationProvider } from "./contexts/NotificationProvider";
-import { DMConversationProvider } from "./contexts/DMConversationContext";
 import { ScrollProvider } from "./contexts/ScrollProvider";
 import ScrollToTopButton from "../shared/ui/ScrollToTopButton";
-import { SocketProvider } from "./contexts/SocketProvider";
-import NotificationSocketBridge from "./NotificationSocketBridge";
-import { OnlineStatusProvider } from "./contexts/OnlineStatusContext";
 import AppRoutes from "./routes";
 import Headermain from "../shared/ui/Header";
 import Preloader from "../shared/ui/Preloader";
@@ -72,31 +63,14 @@ export default function App(): React.ReactElement {
 
   return (
     <HelmetProvider>
-      <AuthProvider>
-        <DataProvider>
-          <InvitesProvider>
-            <NotificationProvider>
-              <DMConversationProvider>
-                <SocketProvider>
-                  <OnlineStatusProvider>
-                    <NotificationSocketBridge>
-                      <ScrollProvider>
-                        <NavigationDirectionProvider>
-                          <Router basename={import.meta.env.BASE_URL}>
-                            <AuthEventHandler />
-                            <MainContent isLoading={isLoading} />
-                            <NotificationContainer />
-                          </Router>
-                        </NavigationDirectionProvider>
-                      </ScrollProvider>
-                    </NotificationSocketBridge>
-                  </OnlineStatusProvider>
-                </SocketProvider>
-              </DMConversationProvider>
-            </NotificationProvider>
-          </InvitesProvider>
-        </DataProvider>
-      </AuthProvider>
+      <DataProvider>
+        <ScrollProvider>
+          <Router basename={import.meta.env.BASE_URL}>
+            <MainContent isLoading={isLoading} />
+            <NotificationContainer />
+          </Router>
+        </ScrollProvider>
+      </DataProvider>
     </HelmetProvider>
   );
 }
