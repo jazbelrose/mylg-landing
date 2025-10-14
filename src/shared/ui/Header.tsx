@@ -12,7 +12,7 @@ import ScrambleText from "scramble-text";
 const Headermain: React.FC = () => {
     const location = useLocation();
     const [isActive, setActive] = useState<boolean>(false);
-    const menuAnimation = useRef<gsap.core.Timeline | null>(null);
+    const menuAnimation = useRef<ReturnType<typeof gsap.timeline> | null>(null);
     const scrollableDivRef = useRef<HTMLDivElement | null>(null);
     const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
     const { isHeaderVisible, updateHeaderVisibility } = useScrollContext();
