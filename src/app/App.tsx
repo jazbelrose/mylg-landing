@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { BrowserRouter as Router, useLocation } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { DataProvider } from "./contexts/DataProvider";
 import { ScrollProvider } from "./contexts/ScrollProvider";
@@ -12,7 +12,7 @@ import ScrollToTopButton from "../shared/ui/ScrollToTopButton";
 import AppRoutes from "./routes";
 import Headermain from "../shared/ui/Header";
 import Preloader from "../shared/ui/Preloader";
-import { NotificationContainer } from "../shared/ui/ToastNotifications";
+
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -67,7 +67,7 @@ export default function App(): React.ReactElement {
         <ScrollProvider>
           <Router basename={import.meta.env.BASE_URL}>
             <MainContent isLoading={isLoading} />
-            <NotificationContainer />
+           
           </Router>
         </ScrollProvider>
       </DataProvider>
@@ -76,16 +76,17 @@ export default function App(): React.ReactElement {
 }
 
 function MainContent({ isLoading }: MainContentProps): React.ReactElement {
-    const location = useLocation();
-    const hideHeader = location.pathname.startsWith("/dashboard");
-    
-    return isLoading ? (
-        <Preloader />
-    ) : (
+    return (
         <>
-            {!hideHeader && <Headermain />}
-            <AppRoutes />
-            <ScrollToTopButton />
+            <Headermain />
+            {isLoading ? (
+                <Preloader />
+            ) : (
+                <>
+                    <AppRoutes />
+                    <ScrollToTopButton />
+                </>
+            )}
         </>
     );
 }

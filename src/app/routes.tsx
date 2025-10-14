@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, Suspense } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Routes, Route, useLocation, Location } from "react-router-dom";
 import WorkPost from "../pages/works/workpage/WorkPost";
 import { AnimatePresence, motion, Variants } from "framer-motion";
@@ -15,51 +15,32 @@ const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
   const { opacity, setOpacity } = useData();
   const opacityClass = opacity === 1 ? "opacity-low" : "opacity-high";
-  const [prevPathname, setPrevPathname] = useState<string>("");
-  
-  useLayoutEffect(() => {
-    const blogPostRouteRegex = /^\/works\/[^/]+$/;
-    const isBlogPost = blogPostRouteRegex.test(pathname);
-    const wasBlogPost = blogPostRouteRegex.test(prevPathname);
-    const shouldAnimate = !isBlogPost && !wasBlogPost;
-    
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    
-    if (shouldAnimate) {
-      setOpacity(0);
-      window.scrollTo(0, 0);
-      timer = setTimeout(() => {
-        setOpacity(1);
-      }, 300);
-    } else {
+
+  useEffect(() => {
+    setOpacity(0);
+    const timer = setTimeout(() => {
       setOpacity(1);
-    }
-    
-    setPrevPathname(pathname);
-    
+    }, 300);
+
     return () => {
-      if (timer !== undefined) {
-        clearTimeout(timer);
-      }
-      if (shouldAnimate) {
-        setOpacity(0);
-      }
+      clearTimeout(timer);
+      setOpacity(0);
     };
-  }, [pathname, setOpacity, prevPathname]);
-  
+  }, [pathname, setOpacity]);
+
   return <div className={`page-fade ${opacityClass}`} />;
 };
 
 const pageVariants: Variants = {
-  initial: { opacity: 0, y: "100vh" },
+  initial: { opacity: 0, y: 0 },
   in: { opacity: 1, y: 0 },
-  out: { opacity: 0, y: "100vh" },
+  out: { opacity: 0, y: 0, transition: { duration: 0.15, ease: "easeIn" } },
 };
 
 const pageTransition = {
   type: "tween" as const,
-  ease: "anticipate",
-  duration: 1,
+  ease: "easeOut",
+  duration: 0.35,
 };
 
 function AppRoutes(): React.ReactElement {
@@ -82,7 +63,16 @@ interface ActualRoutesProps {
 const ActualRoutes: React.FC<ActualRoutesProps> = ({ location }) => {
   
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence
+      mode="wait"
+      initial={false}
+      onExitComplete={() => {
+        if (typeof window === "undefined") {
+          return;
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      }}
+    >
       <Routes key={location.pathname} location={location}>
         <Route 
           path="/" 
