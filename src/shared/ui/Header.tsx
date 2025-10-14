@@ -179,7 +179,7 @@ const Headermain: React.FC = () => {
 
     return (
         <>
-            <header className={`fixed-top header ${isHeaderVisible ? "" : "hide"}`}>
+            <header className={`header ${isHeaderVisible ? "" : "hide"}`}>
                 <div className="nav-bar">
                     <Link 
                         to="/" 
