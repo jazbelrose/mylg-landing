@@ -187,7 +187,7 @@ export const Home: React.FC = () => {
         <div className="home-info-container">
           <div className="image-container" style={{ position: "relative" }}>
             <img
-              src="https://d2qb21tb4meex0.cloudfront.net/Iphone-mockup.png"
+              src="https://d2qb21tb4meex0.cloudfront.net/Iphone-mockup.webp"
               alt="Our Platform"
               className="responsive-image"
             />
@@ -365,7 +365,7 @@ export const Home: React.FC = () => {
           </div>
           <div className="sign-up-image" style={{ alignItems: "flex-end" }}>
             <img
-              src="https://d2qb21tb4meex0.cloudfront.net/Iphone14-mockup-signup-01.png"
+              src="https://d2qb21tb4meex0.cloudfront.net/Iphone14-mockup-signup-01.webp"
               alt="Get Started"
               className="responsive-image2"
             />
