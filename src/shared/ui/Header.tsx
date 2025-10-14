@@ -191,12 +191,15 @@ const Headermain: React.FC = () => {
                         <span className="scrambled">*MYLG!*</span>
                     </Link>
                     <div className="nav-links">
+                        <Link to="/" className={`nav-link ${getLinkClass("/")}`}>
+                            HOME
+                        </Link>
                         <Link to="/works" className={`nav-link ${getLinkClass("/works")}`}>
                             SHOWCASE
                         </Link>
-                        <Link to="/terms-and-privacy" className={`nav-link ${getLinkClass("/terms-and-privacy")}`}>
-                            TERMS & PRIVACY
-                        </Link>
+                        <a href="https://app.mylg.studio" className="nav-link" target="_blank" rel="noopener noreferrer">
+                            DASHBOARD
+                        </a>
                     </div>
                     <div className="right-bar">
                         <button className="toggle-button" onClick={handleToggle}>
@@ -222,7 +225,7 @@ const Headermain: React.FC = () => {
                                         HOME
                                     </Link>
                                 </li>
-                              <li className="menu-item">
+                                <li className="menu-item">
                                     <Link 
                                         onClick={handleToggle} 
                                         to="/works" 
@@ -232,12 +235,17 @@ const Headermain: React.FC = () => {
                                     </Link>
                                 </li>
                                 <li className="menu-item">
+                                    <a href="https://app.mylg.studio" className="my-3" target="_blank" rel="noopener noreferrer" onClick={handleToggle}>
+                                        DASHBOARD
+                                    </a>
+                                </li>
+                                <li className="menu-item">
                                     <Link 
                                         onClick={handleToggle} 
                                         to="/terms-and-privacy" 
                                         className={`my-3 ${getLinkClass("/terms-and-privacy")}`}
                                     >
-                                        TERMS & PRIVACY
+                                        PRIVACY
                                     </Link>
                                 </li>
                             </ul>
