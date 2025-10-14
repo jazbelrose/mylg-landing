@@ -17,7 +17,7 @@ import Preloader from "../shared/ui/Preloader";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 if (typeof document !== "undefined") {
-    Modal.setAppElement("#root");
+    Modal.setAppElement(document.body);
 }
 
 interface MainContentProps {

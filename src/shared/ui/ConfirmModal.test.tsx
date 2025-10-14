@@ -16,10 +16,7 @@ import Modal from 'react-modal';
 
 // Set up modal for testing
 beforeAll(() => {
-  const root = document.createElement('div');
-  root.id = 'root';
-  document.body.appendChild(root);
-  Modal.setAppElement('#root');
+  Modal.setAppElement(document.body);
 });
 
 // Note: react-modal is mocked in setup.ts

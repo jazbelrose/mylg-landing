@@ -19,7 +19,7 @@ if (import.meta.env.DEV) {
 Amplify.configure(awsConfig);
 
 // ✅ Root element typing with non-null assertion (!)
-const rootElement = document.getElementById('root')!;
+const rootElement = document.body;
 Modal.setAppElement(rootElement);
 
 const root = ReactDOM.createRoot(rootElement);
