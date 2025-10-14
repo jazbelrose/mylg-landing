@@ -12,12 +12,12 @@ import ScrollToTopButton from "../shared/ui/ScrollToTopButton";
 import AppRoutes from "./routes";
 import Headermain from "../shared/ui/Header";
 import Preloader from "../shared/ui/Preloader";
-import { NotificationContainer } from "../shared/ui/ToastNotifications";
+
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 if (typeof document !== "undefined") {
-    Modal.setAppElement("#root");
+    Modal.setAppElement(document.body);
 }
 
 interface MainContentProps {
@@ -67,7 +67,7 @@ export default function App(): React.ReactElement {
         <ScrollProvider>
           <Router basename={import.meta.env.BASE_URL}>
             <MainContent isLoading={isLoading} />
-            <NotificationContainer />
+            
           </Router>
         </ScrollProvider>
       </DataProvider>
