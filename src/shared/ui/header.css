@@ -166,11 +166,12 @@
 .toggle-button {
 
   color: #fff;
-  z-index: 1000;
+  z-index: 1004;
   background: none;
   /* remove default button background */
   border: none;
   /* remove default button border */
+  position: relative;
 
   margin: 0;
   padding: 0;
