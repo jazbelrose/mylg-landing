@@ -5,7 +5,7 @@ import { getFileUrl } from '../utils/api';
 import './portfolio-card.css';
 import CustomIcon from '../../assets/svg/angled-arrow.svg?react';
 
-interface PortfolioCardProps {
+export interface PortfolioCardProps {
   linkUrl: string;
   imageSrc: string;
   imageAlt: string;

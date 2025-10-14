@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { CSSPlugin } from "gsap/CSSPlugin";
 import { Helmet } from "react-helmet-async";
-import worksDataJson from "./works.json"; // typed below
 
 import "./showcase.css";
 import "@/shared/css/marketingpages.css";
@@ -13,24 +12,12 @@ import allBlogPosts from "./allBlogPosts.json";
 import SingleTicker from "../../shared/ui/SingleTicker";
 import BlogCard from "@/shared/ui/BlogCard";
 import { useScrollContext } from "@/app/contexts/useScrollContext";
+import { SHOWCASE_FEATURED_SLUGS } from "@/config/galleryLayouts";
+import { orderWorkItems, type WorkItem } from "@/shared/data/workItems";
 
 gsap.registerPlugin(CSSPlugin);
 
 // ---- Types ----
-type WorkItem = {
-  id?: number;
-  slug: string;
-  date?: string;
-  tags?: string[];
-  title: string;
-  subtitle?: string;
-  description?: string;
-  images: string[];
-  readingTime?: string | number;
-  authorName?: string;
-  [key: string]: unknown;
-};
-
 type WorksProps = {
   maxPosts?: number;
 };
@@ -43,7 +30,10 @@ export const Works: React.FC<WorksProps> = ({ maxPosts = 45 }) => {
   const blogPostRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Data / state
-  const allWorks = (worksDataJson as WorkItem[]) ?? [];
+  const allWorks = useMemo(
+    () => orderWorkItems(SHOWCASE_FEATURED_SLUGS),
+    []
+  );
   const [displayedWorks, setDisplayedWorks] = useState<WorkItem[]>(
     allWorks.slice(0, maxPosts)
   );
@@ -146,8 +136,7 @@ export const Works: React.FC<WorksProps> = ({ maxPosts = 45 }) => {
 
   useEffect(() => {
     setDisplayedWorks(allWorks.slice(0, maxPosts));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maxPosts]);
+  }, [allWorks, maxPosts]);
 
   // Lay out works in your 7-position pattern (with a double card at 3/4)
   const renderWorks = (works: WorkItem[]) => {
