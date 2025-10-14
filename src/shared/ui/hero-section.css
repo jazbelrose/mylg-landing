@@ -98,12 +98,12 @@
     padding: 20px 15px 5px;
   }
 
-  .info-text {padding: 10px 15px 10px;
+  .info-text {padding: 10px 15px 5px;
   }}
 
 @media (max-width: 576px) {
   .herosection-container {
-    padding-block: 0;
+    padding-block: 35px 0 ;
   }
 }
 
