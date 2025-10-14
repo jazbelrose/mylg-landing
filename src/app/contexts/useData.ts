@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DataContext, type LandingDataValue } from "./DataProvider";
+import { DataContext, type LandingDataValue } from "./DataContext";
 
 export const useData = (): LandingDataValue => {
   const ctx = useContext(DataContext);
