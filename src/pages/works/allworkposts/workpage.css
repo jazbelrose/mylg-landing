@@ -4,6 +4,12 @@
   max-width: 1920px; /* Replace 600px with your desired maximum width */
   margin: 0 auto; /* Center the element horizontally */
 }
+
+@media (max-width: 768px) {
+  .workpage-heading {
+    padding-top: 45px;
+  }
+}
 .works {
     padding-top: 50px;
     margin: 20px;
@@ -32,16 +38,6 @@
   }
    
  
-
-/* Work page layout styles now imported from modular components */
-
-}
-
-
-/* Rendering components now imported from modular components */
-
-
-/* YouTube container styles now imported from modular components */
 
 
 @media (max-width: 768px) {
