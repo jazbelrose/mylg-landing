@@ -55,7 +55,7 @@ export const HeroSection: React.FC = () => {
       </div>
       <div className="video-wrapper" style={{ maxWidth: '1920px', margin: '0 auto' }}>
         <div className="info-text">
-          <h4 className="sub-heading">
+          <h4 className="sub-heading" style={{ marginLeft: '0px', marginRight: '0px', padding: '0 0 10px' }}>
             We help you present your ideas digitally and execute them flawlessly in real life.
           </h4>
           <div className="hero-button-container">
