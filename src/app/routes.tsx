@@ -23,7 +23,7 @@ const ScrollToTop: React.FC = () => {
     const wasBlogPost = blogPostRouteRegex.test(prevPathname);
     const shouldAnimate = !isBlogPost && !wasBlogPost;
     
-    let timer: number;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     
     if (shouldAnimate) {
       setOpacity(0);
@@ -38,7 +38,9 @@ const ScrollToTop: React.FC = () => {
     setPrevPathname(pathname);
     
     return () => {
-      clearTimeout(timer);
+      if (timer !== undefined) {
+        clearTimeout(timer);
+      }
       if (shouldAnimate) {
         setOpacity(0);
       }
