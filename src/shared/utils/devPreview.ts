@@ -1,4 +1,4 @@
-import type { Project, Thread, UserLite } from "@/app/contexts/DataProvider";
+import type { Project, Thread, UserLite } from "@/app/contexts/DataContext";
 import type { ProjectMessagesMap } from "@/app/contexts/MessagesContextValue";
 
 type PreviewNumber = number | string;
