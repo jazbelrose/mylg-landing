@@ -13,6 +13,8 @@ import { InfoSection } from "../../../shared/ui";
 import SingleTicker from "../../../shared/ui/SingleTicker";
 import { useData } from "@/app/contexts/useData";
 import InlineSVG from "../../../shared/ui/InlineSVG";
+import { ProgressiveImage } from "../../../shared/ui/ProgressiveImage";
+import { SvgOverlayPortal } from "../../../shared/ui/SvgOverlayPortal";
 
 
 
@@ -299,15 +301,13 @@ const Ulta = () => {
                 <div className="rendering-row-img">
 
                     <div className="img-container ">
-
-
-
-
-                        <img src="https://d1cazymewvlm0k.cloudfront.net/46-ulta/00.png" loading="lazy" alt="Ulta Image" width="100%" height="100%" onClick={() => openModal(0)} style={{
-                            cursor: "pointer"
-                        }} />
-
-
+                        <ProgressiveImage
+                            src="https://d1cazymewvlm0k.cloudfront.net/46-ulta/00.png"
+                            alt="Ulta Image"
+                            onClick={() => openModal(0)}
+                            aspectRatio="16/9"
+                            cacheImage={true}
+                        />
                     </div>
                     <div className="img-container ">
 

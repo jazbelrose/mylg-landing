@@ -3,10 +3,11 @@ import React, { useRef, useEffect, useState } from "react";
 export interface InlineSvgProps {
   src: string;
   className?: string;
+  style?: React.CSSProperties;
   onReady?: (svg: SVGSVGElement | null) => void;
 }
 
-export default function InlineSvg({ src, className, onReady }: InlineSvgProps) {
+export default function InlineSvg({ src, className, style, onReady }: InlineSvgProps) {
   const hostRef = useRef<HTMLSpanElement>(null);
   const [markup, setMarkup] = useState("");
 
@@ -36,7 +37,13 @@ export default function InlineSvg({ src, className, onReady }: InlineSvgProps) {
     <span
       ref={hostRef}
       className={className}
-      style={{ display: "block", lineHeight: 0 }}
+      style={{ 
+        display: "block", 
+        lineHeight: 0, 
+        width: "100%", 
+        height: "auto",
+        ...style 
+      }}
       dangerouslySetInnerHTML={{ __html: markup }}
       aria-hidden="true"
     />
