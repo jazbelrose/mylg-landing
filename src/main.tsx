@@ -19,17 +19,15 @@ if (import.meta.env.DEV) {
 Amplify.configure(awsConfig);
 
 // ✅ Root element typing with non-null assertion (!)
-const rootElement = document.body;
+const rootElement = document.getElementById('root')!;
 Modal.setAppElement(rootElement);
 
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
-  <React.StrictMode>
-    <ConfigProvider>
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>
+  <ConfigProvider>
+    <App />
+  </ConfigProvider>
 );
 
 

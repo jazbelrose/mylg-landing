@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense } from "react";
+import React, { Suspense } from "react";
 import { Routes, Route, useLocation, Location } from "react-router-dom";
 import WorkPost from "../pages/works/workpage/WorkPost";
 import { AnimatePresence, motion, Variants } from "framer-motion";
@@ -12,21 +12,21 @@ import { Works } from "../pages/works/showcase";
 import Spinner from "../shared/ui/Spinner";
 
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
-  const { opacity, setOpacity } = useData();
+  const { opacity } = useData();
   const opacityClass = opacity === 1 ? "opacity-low" : "opacity-high";
 
-  useEffect(() => {
-    setOpacity(0);
-    const timer = setTimeout(() => {
-      setOpacity(1);
-    }, 300);
+  // Disable opacity animation to prevent multiple re-mounts
+  // useEffect(() => {
+  //   setOpacity(0);
+  //   const timer = setTimeout(() => {
+  //     setOpacity(1);
+  //   }, 300);
 
-    return () => {
-      clearTimeout(timer);
-      setOpacity(0);
-    };
-  }, [pathname, setOpacity]);
+  //   return () => {
+  //     clearTimeout(timer);
+  //     setOpacity(0);
+  //   };
+  // }, [pathname, setOpacity]);
 
   return <div className={`page-fade ${opacityClass}`} />;
 };

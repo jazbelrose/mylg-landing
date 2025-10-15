@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Modal from "react-modal";
 import { gsap } from "gsap";
@@ -25,17 +25,18 @@ interface MainContentProps {
 }
 
 export default function App(): React.ReactElement {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const isLoading = false;
 
-  useEffect(() => {
-    if (isLoading) {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-        sessionStorage.setItem("isLoaded", "true"); // Set in session storage that loading has completed
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [isLoading]);
+  // Remove the loading timer effect entirely
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     const timer = setTimeout(() => {
+  //       setIsLoading(false);
+  //       sessionStorage.setItem("isLoaded", "true"); // Set in session storage that loading has completed
+  //     }, 1500);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isLoading]);
 
   useEffect(() => {
     const setFavicon = (darkMode: boolean): void => {

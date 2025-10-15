@@ -1,5 +1,5 @@
 // Home.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { useScrollContext } from "@/app/contexts/useScrollContext";
 import { gsap } from "gsap";
@@ -19,6 +19,8 @@ import "./home.css";
 gsap.registerPlugin(ScrollTrigger);
 
 export const Home: React.FC = () => {
+  console.log('🏠 Home component mounting');
+  
   const { opacity } = useData() as { opacity: number };
   const opacityClass = opacity === 1 ? "opacity-high" : "opacity-low";
 
@@ -27,7 +29,7 @@ export const Home: React.FC = () => {
 
   const { updateHeaderVisibility } = useScrollContext();
 
-  const handleWindowScroll = () => {
+  const handleWindowScroll = useCallback(() => {
     const currentScrollPos = typeof window !== "undefined" ? window.scrollY : 0;
     if (currentScrollPos <= 5) {
       updateHeaderVisibility(true);
@@ -36,14 +38,13 @@ export const Home: React.FC = () => {
       updateHeaderVisibility(isScrollingUp);
     }
     setPrevScrollPos(currentScrollPos);
-  };
+  }, [prevScrollPos, updateHeaderVisibility]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     window.addEventListener("scroll", handleWindowScroll);
     return () => window.removeEventListener("scroll", handleWindowScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prevScrollPos]);
+  }, [handleWindowScroll]);
 
   const tickerLines: readonly string[] = [
     " L.A. +22 ← Paris, France +1  ←   New York. ←  London.  ←  California",
@@ -51,28 +52,9 @@ export const Home: React.FC = () => {
     "↜34.0549° N, 118.2426° W 48.8566° N, 2.3522° E 40.7128° N, 74.0060° W 51.5072° N, 0.1276° W",
   ];
 
-  useEffect(() => {
-    const tl = gsap.timeline();
-    tl.to("#revealPath", {
-      attr: { d: "M0,50S17.5,27.2,50,27.2s50,23,100,23V0H0Z" },
-      duration: 0.75,
-      ease: "Power1.easeIn",
-    }).to("#revealPath", {
-      attr: { d: "M0,0S17.5,0,50,0s50,0,100,0V0H0Z" },
-      duration: 0.5,
-      ease: "power1.easeOut",
-    });
-  }, []);
 
   const isDesktop = typeof window !== "undefined" && window.innerWidth > 768;
 
-  const overlay = (
-    <div className="svg-overlay" aria-hidden="true">
-      <svg viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="none">
-        <path id="revealPath" d="M0,100S17.5,100,50,100s50,0,100,0V0H0Z" />
-      </svg>
-    </div>
-  );
 
   return (
     <>
@@ -114,7 +96,7 @@ export const Home: React.FC = () => {
         <meta name="twitter:image:alt" content="MYLG Platform Mockup" />
       </Helmet>
 
-      {overlay}
+      
 
       <div className={opacityClass}>
 
