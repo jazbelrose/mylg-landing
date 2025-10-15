@@ -25,6 +25,8 @@ html {
   height: 100dvh;
   overscroll-behavior: none;
   scrollbar-width: none;
+  background-color: var(--bg-color);
+  color-scheme: dark;
 }
 
 body {
@@ -33,6 +35,7 @@ body {
   width: 100%;
   min-height: 100vh; /* fallback */
   min-height: 100dvh;
+  background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-family-primary);
   font-weight: 700;
@@ -42,6 +45,11 @@ body {
   overflow: -moz-scrollbars-none;
   -ms-overflow-style: none;
   letter-spacing: var(--letter-spacing-tight);
+}
+
+#root {
+  min-height: 100%;
+  background-color: var(--bg-color);
 }
 
 /* List styles */
