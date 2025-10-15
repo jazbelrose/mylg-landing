@@ -95,7 +95,7 @@ export const Home: React.FC = () => {
         />
         <meta
           property="og:image"
-          content="https://d2qb21tb4meex0.cloudfront.net/Iphone+14+mockup+sign+up.png"
+          content="https://d2qb21tb4meex0.cloudfront.net/Iphone14-mockup-signup-01.webp"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -109,7 +109,7 @@ export const Home: React.FC = () => {
         />
         <meta
           name="twitter:image"
-          content="https://d2qb21tb4meex0.cloudfront.net/Iphone+14+mockup+sign+up.png"
+          content="https://d2qb21tb4meex0.cloudfront.net/Iphone14-mockup-signup-01.webp"
         />
         <meta name="twitter:image:alt" content="MYLG Platform Mockup" />
       </Helmet>
