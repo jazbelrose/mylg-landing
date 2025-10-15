@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Modal from "react-modal";
 import { gsap } from "gsap";
@@ -25,18 +25,20 @@ interface MainContentProps {
 }
 
 export default function App(): React.ReactElement {
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState<boolean>(() => {
+    // Only show preloader on first visit, not on refreshes
+    return !sessionStorage.getItem("hasVisited");
+  });
 
-  // Remove the loading timer effect entirely
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     const timer = setTimeout(() => {
-  //       setIsLoading(false);
-  //       sessionStorage.setItem("isLoaded", "true"); // Set in session storage that loading has completed
-  //     }, 1500);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isLoading]);
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        sessionStorage.setItem("hasVisited", "true");
+      }, 2000); // Show preloader for 2 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     const setFavicon = (darkMode: boolean): void => {
@@ -79,11 +81,11 @@ export default function App(): React.ReactElement {
 function MainContent({ isLoading }: MainContentProps): React.ReactElement {
     return (
         <>
-            <Headermain />
             {isLoading ? (
                 <Preloader />
             ) : (
                 <>
+                    <Headermain />
                     <AppRoutes />
                     <ScrollToTopButton />
                 </>
