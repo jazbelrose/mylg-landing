@@ -357,6 +357,15 @@ h2.heading {
   font-size: 4rem;
 }
 
+  .responsive-image2 {
+    transform: scale(1.3);
+  }
+
+  .sign-up-image {
+    margin-top: 100px;
+    margin-bottom: 60px;
+  }
+
   .portfolio-row {
     flex-direction: column;
     align-items: center;
