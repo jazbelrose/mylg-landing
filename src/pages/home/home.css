@@ -97,6 +97,12 @@ h2.heading {
   border-radius: 20px; /* As per your style */
 }
 
+.responsive-image2 {
+  width: 960px;
+  height: auto;
+  border-radius: 20px;
+}
+
 
 .blog-header, .work-header, .info-header {
   display: flex;
@@ -323,6 +329,11 @@ h2.heading {
     max-width: 100%; /* Limit the image width to the container size */
     height: auto; /* Maintain aspect ratio */
     margin-top: 20px; /* Add space between columns */
+  }
+
+  .responsive-image2 {
+    width: 100%;
+    height: auto;
   }
 }
 
