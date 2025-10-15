@@ -1,0 +1,36 @@
+html {
+  background: #0c0c0c;
+}
+
+body {
+  background: transparent;
+  overflow-y: auto;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  height: 100dvh;
+  min-height: 100lvh;
+  background: #0c0c0c;
+}
+
+#root,
+.App,
+main {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100dvh;
+}
+
+html,
+body,
+#root,
+.App,
+main {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}

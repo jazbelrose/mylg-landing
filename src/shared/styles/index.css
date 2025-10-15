@@ -11,6 +11,7 @@
 
 /* Base Styles - Global resets and base elements */
 @import './base/reset.css';
+@import './ios-scrollbehind.css';
 
 /* Layout Styles */
 @import './layouts/dashboard.css';

@@ -8,6 +8,7 @@ import NotFound from "../shared/ui/404";
 import TermsAndPrivacy from "../pages/TermsAndPrivacy/TermsAndPrivacy";
 import { Home } from "../pages/home/home";
 import { Works } from "../pages/works/showcase";
+import RootPortal from "@/shared/ui/RootPortal";
 
 import Spinner from "../shared/ui/Spinner";
 
@@ -74,19 +75,14 @@ const ActualRoutes: React.FC<ActualRoutesProps> = ({ location }) => {
       }}
     >
       <Routes key={location.pathname} location={location}>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
-            <motion.div
-              initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}
-            >
+            // Mount Home at <body> level to enable iOS scroll-behind
+            <RootPortal>
               <Home />
-            </motion.div>
-          } 
+            </RootPortal>
+          }
         />
         
         <Route 
