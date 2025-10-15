@@ -104,23 +104,25 @@
         "readingTime": "4",
         "authorName": "J&J"
     },
-    {
-        "id": "4271",
-        "slug": "Keys-Soulcare",
-        "date": "23-01-17",
+        {
+        "id": "4275",
+        "slug": "Ulta",
+        "date": "17-10-24",
         "tags": [
-            "Immersive Digital",
-            "3d Rendering"
+           "Branding",
+            "3D-Rendering",
+            "Graphic Design"
         ],
-        "title": "Keys Soulcare",
-        "subtitle": "Mokibaby",
-        "description": "Mokibaby collaborated with Keys Soulcare in Hamburg, Germany. Guests were welcomed into the iconic Haller 6 venue where they could explore new rituals and offerings...",
+        "title": "ULTA",
+        "subtitle": "Ulta-centric Beauty Lounge",
+        "description": "Mokibaby designed an Ulta-inspired Beauty Lounge for AOP, blending clean aesthetics with pop vibes for a glamorous student experience.",
         "images": [
-            "https://d2qb21tb4meex0.cloudfront.net/19-Keys+Soulcare/01+Keys+Soulcare.jpg" 
+            "https://d1cazymewvlm0k.cloudfront.net/46-ulta/ulta-cover.png" 
         ],
-        "readingTime": "3",
+        "readingTime": "6",
         "authorName": "J&J"
     },
+
     {
         "id": "4283",
         "slug": "Pipe-Dream-Events",
@@ -578,22 +580,22 @@
         "readingTime": "3",
         "authorName": "J&J"
     },
+
     {
-        "id": "4275",
-        "slug": "Ulta",
-        "date": "17-10-24",
+        "id": "4271",
+        "slug": "Keys-Soulcare",
+        "date": "23-01-17",
         "tags": [
-           "Branding",
-            "3D-Rendering",
-            "Graphic Design"
+            "Immersive Digital",
+            "3d Rendering"
         ],
-        "title": "ULTA",
-        "subtitle": "Ulta-centric Beauty Lounge",
-        "description": "Mokibaby designed an Ulta-inspired Beauty Lounge for AOP, blending clean aesthetics with pop vibes for a glamorous student experience.",
+        "title": "Keys Soulcare",
+        "subtitle": "Mokibaby",
+        "description": "Mokibaby collaborated with Keys Soulcare in Hamburg, Germany. Guests were welcomed into the iconic Haller 6 venue where they could explore new rituals and offerings...",
         "images": [
-            "https://d1cazymewvlm0k.cloudfront.net/46-ulta/ulta-cover.png" 
+            "https://d2qb21tb4meex0.cloudfront.net/19-Keys+Soulcare/01+Keys+Soulcare.jpg" 
         ],
-        "readingTime": "6",
+        "readingTime": "3",
         "authorName": "J&J"
     },
     {
