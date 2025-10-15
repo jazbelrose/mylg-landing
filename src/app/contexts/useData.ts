@@ -1,17 +1,13 @@
-import { useUser } from "./useUser";
-import { useProjects } from "./useProjects";
-import { useMessages } from "./useMessages";
-import type { UserContextValue } from "./UserContextValue";
-import type { ProjectsValue } from "./ProjectsContextValue";
-import type { MessagesValue } from "./MessagesContextValue";
+import { useContext } from "react";
+import { DataContext, type LandingDataValue } from "./DataContext";
 
-type DataValue = UserContextValue & ProjectsValue & MessagesValue;
-
-export const useData = (): DataValue => ({
-  ...useUser(),
-  ...useProjects(),
-  ...useMessages(),
-});
+export const useData = (): LandingDataValue => {
+  const ctx = useContext(DataContext);
+  if (!ctx) {
+    throw new Error("useData must be used within <DataProvider>");
+  }
+  return ctx;
+};
 
 
 

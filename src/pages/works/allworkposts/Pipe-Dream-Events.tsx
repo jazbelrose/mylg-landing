@@ -229,7 +229,7 @@ const PipedDreamEvents = () => {
           trigger: ".st3",
           start: "top 150%", // Adjust trigger threshold as needed
           toggleActions: "play none none none", // Play animation only once
-          markers: true, // Debug markers
+          
         },
       }
     );
@@ -243,7 +243,7 @@ const PipedDreamEvents = () => {
         trigger: ".st3",
         start: "top 150%", // Adjust trigger threshold as needed
         toggleActions: "play none none none",
-        markers: true, // Debug markers
+        
       },
     });
 

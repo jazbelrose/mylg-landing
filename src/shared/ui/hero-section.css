@@ -5,6 +5,7 @@
   background: #0c0c0c;
   
   overflow: auto;
+  padding-top: 50px;
 }
 .herosection-container > :first-child { margin-top: 0; }
 .herosection-container > :last-child { margin-bottom: 0; }
@@ -98,12 +99,14 @@
     padding: 20px 15px 5px;
   }
 
-  .info-text {padding: 10px 15px 10px;
-  }}
+  .info-text {padding: 10px 15px 5px;
+  }
+
+}
 
 @media (max-width: 576px) {
   .herosection-container {
-    padding-block: 0;
+    padding-block: 35px 0 ;
   }
 }
 

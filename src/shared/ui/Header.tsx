@@ -20,6 +20,7 @@ const Headermain: React.FC = () => {
     const logoHoveredRef = useRef<boolean>(false);
     const [logoOriginalColor, setLogoOriginalColor] = useState<string | null>(null);
     const logoScrambleInstance = useRef<ScrambleText | null>(null);
+    const scrollPositionRef = useRef<number>(0);
 
     // Removed dropdown state/logic completely
     const getLinkClass = (path: string): string => {
@@ -106,6 +107,10 @@ const Headermain: React.FC = () => {
                     setActive(false);
                     document.body.classList.remove("ovhidden");
                     htmlElement.classList.remove("globalnav--noscroll");
+                    // Restore scroll position
+                    document.body.style.top = '';
+                    document.body.style.position = '';
+                    window.scrollTo(0, scrollPositionRef.current);
                     const navMenu = document.querySelector(".nav-bar-menu") as HTMLElement | null;
                     if (navMenu) {
                         navMenu.classList.remove("opened");
@@ -115,8 +120,18 @@ const Headermain: React.FC = () => {
                 setActive(false);
                 document.body.classList.remove("ovhidden");
                 htmlElement.classList.remove("globalnav--noscroll");
+                // Restore scroll position
+                document.body.style.top = '';
+                document.body.style.position = '';
+                window.scrollTo(0, scrollPositionRef.current);
             }
         } else {
+            // Save current scroll position
+            scrollPositionRef.current = window.scrollY;
+            // Apply fixed positioning to prevent scroll
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollPositionRef.current}px`;
+            
             htmlElement.classList.add("globalnav--noscroll");
             document.body.classList.add("ovhidden");
             if (menuAnimation.current) {
@@ -179,7 +194,7 @@ const Headermain: React.FC = () => {
 
     return (
         <>
-            <header className={`fixed-top header ${isHeaderVisible ? "" : "hide"}`}>
+            <header className={`header ${isHeaderVisible ? "" : "hide"}`}>
                 <div className="nav-bar">
                     <Link 
                         to="/" 

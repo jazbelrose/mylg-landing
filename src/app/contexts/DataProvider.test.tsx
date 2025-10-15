@@ -68,7 +68,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataProvider from './DataProvider';
 import { useData } from './useData';
-import type { TimelineEvent } from './DataProvider';
+import type { TimelineEvent } from './DataContext';
 
 const ErrProbe: React.FC = () => {
   const { projectsError } = useData();
