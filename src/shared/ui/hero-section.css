@@ -7,6 +7,28 @@
   overflow: auto;
   padding-top: 50px;
 }
+
+/* Initial animation states to prevent GSAP flash - only for hero section */
+.herosection-container .header-section svg polygon.arrow {
+  opacity: 0;
+  /* Remove transform to preserve spacing */
+}
+
+.herosection-container .header-section svg text.hero-text {
+  opacity: 0;
+  /* Remove transform to preserve spacing */
+}
+
+.herosection-container .sub-heading {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.herosection-container .hero-button-container {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 .herosection-container > :first-child { margin-top: 0; }
 .herosection-container > :last-child { margin-bottom: 0; }
 
