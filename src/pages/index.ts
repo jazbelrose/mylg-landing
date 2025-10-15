@@ -14,7 +14,7 @@ import "./works/showcase.css";
 
 // Works data
 export { default as allBlogPosts } from "./works/allBlogPosts.json";
-export { default as worksData } from "./works/works.json";
+export { workItems as worksData } from "@/shared/data/workItems";
 
 // Individual WorkPost
 export { default as WorkPost } from "./works/workpage/WorkPost";

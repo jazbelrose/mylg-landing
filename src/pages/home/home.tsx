@@ -1,5 +1,5 @@
 // Home.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useScrollContext } from "@/app/contexts/useScrollContext";
 import { gsap } from "gsap";
@@ -13,6 +13,8 @@ import Ticker from "../../shared/ui/Ticker";
 import SingleTicker from "../../shared/ui/SingleTicker";
 import ScrollToTopButton from "../../shared/ui/ScrollToTopButton";
 import { useData } from "@/app/contexts/useData";
+import { HOME_FEATURED_SECTIONS } from "@/config/featuredProjects";
+import { createPortfolioCardProps } from "@/shared/data/workItems";
 import "@/shared/css/marketingpages.css";
 import "./home.css";
 
@@ -50,6 +52,15 @@ export const Home: React.FC = () => {
     "ADPTV.TROIA.NOCCO.PD.BAREBELLS.MISTIFI.ZAPPOS.THE GOLD PRINCESS.MOKIBABY.",
     "↜34.0549° N, 118.2426° W 48.8566° N, 2.3522° E 40.7128° N, 74.0060° W 51.5072° N, 0.1276° W",
   ];
+
+  const featuredSections = useMemo(
+    () =>
+      HOME_FEATURED_SECTIONS.map(({ cards, ...section }) => ({
+        ...section,
+        cards: cards.map((cardConfig) => createPortfolioCardProps(cardConfig)),
+      })),
+    []
+  );
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -121,36 +132,23 @@ export const Home: React.FC = () => {
         <HeroSection />
 
         <div className="header-section" style={{ padding: "5px 0", backgroundColor: "#0c0c0c" }}>
-          <div className="portfolio-row double-card-row">
-            <PortfolioCard
-              linkUrl="/works/strikefit"
-              imageSrc="https://d2qb21tb4meex0.cloudfront.net/images/Jack-Masai.jpg"
-              imageAlt="Strike Fit"
-              title="Strike Fit"
-              subtitle="Paris, France"
-              description="Branding, Photography, Styling"
-            />
-            <PortfolioCard
-              linkUrl="/works/Bloom-and-Bliss"
-              imageSrc="https://d2qb21tb4meex0.cloudfront.net/images/Bloom-And-Bliss.jpg"
-              imageAlt="Bloom & Bliss Design"
-              title="Bloom & Bliss"
-              subtitle="Brand Identity"
-              description="Branding, 3D Animation"
-            />
-          </div>
+          {featuredSections.map((section) => {
+            const baseClass =
+              section.layout === "double"
+                ? "portfolio-row double-card-row"
+                : "portfolio-row single-card-row";
+            const rowClassName = section.rowClassName
+              ? `${baseClass} ${section.rowClassName}`
+              : baseClass;
 
-          <div className="portfolio-row single-card-row">
-            <PortfolioCard
-              linkUrl="/works/elf-Makeup"
-              className="single-card elf"
-              imageSrc="https://d2qb21tb4meex0.cloudfront.net/images/Elf.jpg"
-              imageAlt="e.l.f. Beauty Design"
-              title="e.l.f. Beauty"
-              subtitle="Nylon House Mokibaby Art Basel"
-              description="3D Design, Immersive Digital"
-            />
-          </div>
+            return (
+              <div className={rowClassName} key={section.id}>
+                {section.cards.map((card) => (
+                  <PortfolioCard key={`${section.id}-${card.linkUrl}`} {...card} />
+                ))}
+              </div>
+            );
+          })}
         </div>
 
         <div
