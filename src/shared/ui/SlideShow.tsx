@@ -12,7 +12,7 @@ interface Slide {
   imageUrl: string;
   title: string;
   content: string;
-  url: string;
+  url?: string;
 }
 
 interface SlideshowProps {
@@ -30,17 +30,31 @@ const Slideshow: React.FC<SlideshowProps> = ({ slides }) => {
         spaceBetween={30}
         slidesPerView={1}
       >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <div className="slide-content">
-              <a href={getFileUrl(slide.url)} target="_blank" rel="noopener noreferrer">
-                <img src={getFileUrl(slide.imageUrl)} alt={slide.title} />
-                <h2>{slide.title}</h2>
-                <p>{slide.content}</p>
-              </a>
-            </div>
-          </SwiperSlide>
-        ))}
+        {slides.map((slide, index) => {
+          const resolvedImage = getFileUrl(slide.imageUrl);
+          const resolvedUrl = slide.url ? getFileUrl(slide.url) : undefined;
+          const slideBody = (
+            <>
+              <img src={resolvedImage} alt={slide.title} />
+              <h2>{slide.title}</h2>
+              <p>{slide.content}</p>
+            </>
+          );
+
+          return (
+            <SwiperSlide key={index}>
+              <div className="slide-content">
+                {resolvedUrl ? (
+                  <a href={resolvedUrl} target="_blank" rel="noopener noreferrer">
+                    {slideBody}
+                  </a>
+                ) : (
+                  slideBody
+                )}
+              </div>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );
