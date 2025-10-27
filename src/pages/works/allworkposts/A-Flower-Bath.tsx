@@ -9,6 +9,7 @@ import SingleTicker from "../../../shared/ui/SingleTicker";
 import { useData } from "@/app/contexts/useData";
 import ReactModal from "react-modal";
 import { useScrollContext } from "@/app/contexts/useScrollContext";
+import LoadingOverlay from "../../../shared/ui/LoadingOverlay";
 
 /** Inline remote SVG so GSAP can target its inner nodes */
 function InlineSVG({ src, className, onReady }) {
@@ -50,7 +51,7 @@ function InlineSVG({ src, className, onReady }) {
 }
 
 const AFLowerBath = () => {
-  const imageUrls = aFLowerBathData;
+  const imageUrls = Array.isArray(aFLowerBathData) ? aFLowerBathData : [];
 
   const { isLoading, setIsLoading, opacity } = useData();
   const opacityClass = opacity === 1 ? "opacity-high" : "opacity-low";
@@ -151,6 +152,11 @@ const AFLowerBath = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prevScrollPos]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    return () => setIsLoading(false);
+  }, [setIsLoading]);
+
   // Preload images → setIsLoading(false) when done
   useEffect(() => {
     let done = 0;
@@ -241,7 +247,7 @@ const AFLowerBath = () => {
   }, [isLoading]);
 
   if (isLoading) {
-    return <div />; // your loader if any
+    return <LoadingOverlay message="Loading gallery…" />;
   }
 
   return (

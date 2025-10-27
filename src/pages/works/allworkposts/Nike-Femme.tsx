@@ -12,13 +12,14 @@ import { useData } from "@/app/contexts/useData";
 import ReactModal from "react-modal"; // Import ReactModal
 import { useScrollContext } from "@/app/contexts/useScrollContext";
 import InlineSVG from "../../../shared/ui/InlineSVG";
+import LoadingOverlay from "../../../shared/ui/LoadingOverlay";
 
 
 
 
 const NikeFemme = () => {
 
-  const imageUrls = nikeFemmeData; 
+  const imageUrls = Array.isArray(nikeFemmeData) ? nikeFemmeData : [];
 
  
   const galleryRefs = useRef([]);
@@ -154,24 +155,43 @@ const NikeFemme = () => {
     return () => (document.body.style.overflow = "");
   }, [isModalOpen]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    return () => setIsLoading(false);
+  }, [setIsLoading]);
+
   // Preload images
   useEffect(() => {
+    if (imageUrls.length === 0) {
+      setIsLoading(false);
+      return;
+    }
+
     let loadedImages = 0;
-    const totalImages = imageUrls.length;
+    let isCancelled = false;
 
     const imageLoaded = () => {
       loadedImages++;
-      if (loadedImages === totalImages) {
+      if (!isCancelled && loadedImages === imageUrls.length) {
         setIsLoading(false);
       }
     };
 
-    imageUrls.forEach(url => {
+    const preloaders = imageUrls.map((url) => {
       const img = new Image();
       img.src = url;
       img.onload = imageLoaded;
       img.onerror = imageLoaded;
+      return img;
     });
+
+    return () => {
+      isCancelled = true;
+      preloaders.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+      });
+    };
   }, [imageUrls, setIsLoading]);
 
   // GSAP animation after images have loaded
@@ -245,10 +265,7 @@ const NikeFemme = () => {
   }, [isLoading, svgReady, setIsLoading]); // Dependency on isLoading
 
   if (isLoading) {
-    return <div>
-
-    </div>;
-
+    return <LoadingOverlay message="Loading gallery…" />;
   }
 
 
